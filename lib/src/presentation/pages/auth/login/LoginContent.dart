@@ -54,26 +54,28 @@ class LoginContent extends StatelessWidget {
           ),
           child: Container(
             margin: EdgeInsets.only(left: 25, right: 25),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 50),
-                _textWelcome('Welcome'),
-                _textWelcome('back...'),
-                _imageCar(),
-                _textLogin(),
-                DefaultTextfield(text: "Email", icon: Icons.email_outlined),
-                DefaultTextfield(
-                  text: "Password",
-                  icon: Icons.lock_outline,
-                  margin: EdgeInsets.only(top: 15, left: 20, right: 20),
-                ),
-                Spacer(),
-                Defaultbutton(text: 'LOGIN'),
-                _separatorOr(),
-                SizedBox(height: 10),
-                _textDontHaveAccount(context),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 50),
+                  _textWelcome('Welcome'),
+                  _textWelcome('back...'),
+                  _imageCar(),
+                  _textLogin(),
+                  DefaultTextfield(text: "Email", icon: Icons.email_outlined),
+                  DefaultTextfield(
+                    text: "Password",
+                    icon: Icons.lock_outline,
+                    margin: EdgeInsets.only(top: 15, left: 20, right: 20),
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.2),
+                  Defaultbutton(text: 'LOGIN'),
+                  _separatorOr(),
+                  SizedBox(height: 10),
+                  _textDontHaveAccount(context),
+                ],
+              ),
             ),
           ),
         ),

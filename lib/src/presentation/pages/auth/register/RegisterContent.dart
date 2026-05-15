@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:indriver_clone_flutter2/src/presentation/widgets/DefaultTextFieldOutlined.dart';
 import '../../../widgets/Defaultbutton.dart';
 import '../../../widgets/DefaultTextField.dart';
+import '../../../widgets/DefaultTextFieldOutlined.dart';
 
 class RegisterContent extends StatelessWidget {
   const RegisterContent({super.key});
@@ -50,51 +52,71 @@ class RegisterContent extends StatelessWidget {
               ],
             ),
           ),
-          child: Column(
+          child: Stack(
             children: [
-              _imageBanner(),
-              DefaultTextfield(
-                text: 'Nombre',
-                icon: Icons.person_outline,
-                margin: EdgeInsets.only(left: 50, right: 50, top: 50),
+              _imageBackground(context),
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    _imageBanner(),
+                    DefaultTextfieldOutlined(
+                      text: 'Nombre',
+                      icon: Icons.person_outline,
+                      margin: EdgeInsets.only(left: 50, right: 50, top: 50),
+                    ),
+                    DefaultTextfieldOutlined(
+                      text: 'Apellido',
+                      icon: Icons.person_2_outlined,
+                      margin: EdgeInsets.only(left: 50, right: 50, top: 15),
+                    ),
+                    DefaultTextfieldOutlined(
+                      text: 'Email',
+                      icon: Icons.email_outlined,
+                      margin: EdgeInsets.only(left: 50, right: 50, top: 15),
+                    ),
+                    DefaultTextfieldOutlined(
+                      text: 'Telefono',
+                      icon: Icons.phone_outlined,
+                      margin: EdgeInsets.only(left: 50, right: 50, top: 15),
+                    ),
+                    DefaultTextfieldOutlined(
+                      text: 'Password',
+                      icon: Icons.lock_outlined,
+                      margin: EdgeInsets.only(left: 50, right: 50, top: 15),
+                    ),
+                    DefaultTextfieldOutlined(
+                      text: 'Confirmar Password',
+                      icon: Icons.lock_outlined,
+                      margin: EdgeInsets.only(left: 50, right: 50, top: 15),
+                    ),
+                    Defaultbutton(
+                      text: 'Crear Usuario',
+                      margin: EdgeInsets.only(left: 60, right: 60, top: 30),
+                    ),
+                    SizedBox(height: 25),
+                    _separatorOr(),
+                    SizedBox(height: 10),
+                    _textIAlreadyHaveAnAccount(context),
+                  ],
+                ),
               ),
-              DefaultTextfield(
-                text: 'Apellido',
-                icon: Icons.person_2_outlined,
-                margin: EdgeInsets.only(left: 50, right: 50, top: 15),
-              ),
-              DefaultTextfield(
-                text: 'Email',
-                icon: Icons.email_outlined,
-                margin: EdgeInsets.only(left: 50, right: 50, top: 15),
-              ),
-              DefaultTextfield(
-                text: 'Telefono',
-                icon: Icons.phone_outlined,
-                margin: EdgeInsets.only(left: 50, right: 50, top: 15),
-              ),
-              DefaultTextfield(
-                text: 'Password',
-                icon: Icons.lock_outlined,
-                margin: EdgeInsets.only(left: 50, right: 50, top: 15),
-              ),
-              DefaultTextfield(
-                text: 'Confirmar Password',
-                icon: Icons.lock_outlined,
-                margin: EdgeInsets.only(left: 50, right: 50, top: 15),
-              ),
-              Defaultbutton(
-                text: 'Crear Usuario',
-                margin: EdgeInsets.only(left: 60, right: 60, top: 30),
-              ),
-              SizedBox(height: 25),
-              _separatorOr(),
-              SizedBox(height: 10),
-              _textIAlreadyHaveAnAccount(context),
             ],
           ),
         ),
       ],
+    );
+  }
+
+  Widget _imageBackground(BuildContext context) {
+    return Container(
+      alignment: Alignment.bottomCenter,
+      margin: EdgeInsets.only(bottom: 1),
+      child: Image.asset(
+        'assets/img/delivery.png',
+        width: MediaQuery.of(context).size.width * 0.6,
+        height: MediaQuery.of(context).size.height * 0.4,
+        opacity: AlwaysStoppedAnimation(0.1),
+      ),
     );
   }
 
