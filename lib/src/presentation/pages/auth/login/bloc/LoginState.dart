@@ -1,17 +1,22 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:indriver_clone_flutter2/src/presentation/utils/BlocFormItem.dart';
 
 class LoginState extends Equatable {
   final GlobalKey<FormState>? formKey;
-  final String email;
-  final String password;
+  final BlocFormItem email;
+  final BlocFormItem password;
 
-  const LoginState({this.formKey, this.email = '', this.password = ''});
+  const LoginState({
+    this.formKey,
+    this.email = const BlocFormItem(error: 'Ingresa el email'),
+    this.password = const BlocFormItem(error: 'Ingresa el password'),
+  });
 
   LoginState copyWith({
     GlobalKey<FormState>? formKey,
-    String? email,
-    String? password,
+    BlocFormItem? email,
+    BlocFormItem? password,
   }) {
     return LoginState(
       formKey: formKey ?? this.formKey,

@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:indriver_clone_flutter2/src/presentation/pages/auth/login/bloc/LoginBloc.dart';
 import 'package:indriver_clone_flutter2/src/presentation/pages/auth/login/bloc/LoginEvent.dart';
+import 'package:indriver_clone_flutter2/src/presentation/utils/BlocFormItem.dart';
 import 'package:indriver_clone_flutter2/src/presentation/widgets/DefaultTextField.dart';
 import 'package:indriver_clone_flutter2/src/presentation/widgets/Defaultbutton.dart';
+import 'package:indriver_clone_flutter2/src/presentation/pages/auth/login/bloc/LoginState.dart';
 
 class LoginContent extends StatelessWidget {
-  LoginBloc? bloc;
+  LoginState state;
 
-  LoginContent(this.bloc);
+  LoginContent(this.state);
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: bloc?.state.formKey,
+      key: state.formKey,
       child: Stack(
         children: [
           Container(
@@ -71,14 +74,24 @@ class LoginContent extends StatelessWidget {
                     _textLogin(),
                     DefaultTextfield(
                       onChanged: (text) {
-                        bloc?.add(EmailChanged(email: text));
+                        context.read<LoginBloc>().add(
+                          EmailChanged(email: BlocFormItem(value: text)),
+                        );
+                      },
+                      validator: (value) {
+                        return state.email.error;
                       },
                       text: "Email",
                       icon: Icons.email_outlined,
                     ),
                     DefaultTextfield(
                       onChanged: (text) {
-                        bloc?.add(PasswordChanged(password: text));
+                        context.read<LoginBloc>().add(
+                          PasswordChanged(password: BlocFormItem(value: text)),
+                        );
+                      },
+                      validator: (value) {
+                        return state.password.error;
                       },
                       text: "Password",
                       icon: Icons.lock_outline,
@@ -88,7 +101,11 @@ class LoginContent extends StatelessWidget {
                     Defaultbutton(
                       text: 'LOGIN',
                       onPressed: () {
-                        bloc?.add(FormSubmit());
+                        if (state.formKey!.currentState!.validate()) {
+                          context.read<LoginBloc>().add(FormSubmit());
+                        } else {
+                          print('El formulariono es valido');
+                        }
                       },
                     ),
                     _separatorOr(),
